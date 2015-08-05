@@ -1,57 +1,31 @@
-## 安装：
+#安装配置
 
-#### 代码：
+##安装jshint
 
-```shell
-mkdir ~/bin/
-cd ~/bin/
-git clone git://github.com/nanjingboy/git_code_sniffer_hooks.git
-```
+###安装最新稳定版Node
+>- sudo add-apt-repository ppa:chris-lea/node.js
+>- sudo apt-get update
+>- sudo apt-get install nodejs
 
-#### PHP相关依赖：
+###安装jshint
+>- sudo npm install jshint -g
 
-```shell
-curl -s https://getcomposer.org/installer | php -- --install-dir=$HOME/bin
-chmod +x ~/bin/composer.phar
-cd ~/bin/git_code_sniffer_hooks/
-~/bin/composer.phar install
-```
+##安装git_hook
 
-#### NodeJs相关依赖：
+###获取相关代码
+>- mkdir ~/bin/
+>- cd ~/bin/
+>- git clone git://github.com/mrcoon/git_code_sniffer_hooks.git
 
-```shell
-sudo add-apt-repository ppa:chris-lea/node.js
-sudo apt-get update
-sudo apt-get install nodejs
-cd ~/bin/git_code_sniffer_hooks/
-npm install
-```
+###安装python相关依赖
+>- sudo apt-get install python-setuptools
+>- sudo easy_install pip
+>- sudo pip install -r ~/bin/git_code_sniffer_hooks/requirements.txt
 
-#### Python相关依赖：
+###配置
+>- ln -s ~/bin/git_code_sniffer_hooks/pre-commit ~/workspace/test/.git/hooks/ （假设您的项目目录为~/workspace/test）
 
-```shell
-sudo apt-get install python-setuptools
-sudo easy_install pip
-sudo pip install -r ~/bin/git_code_sniffer_hooks/requirements.txt
-```
-
-#### 其它：
-
-```shell
-sudo apt-get install cowsay
-```
-
-## 配置：
-
-```shell
-#此处假设您的项目目录为~/workspace/test
-ln -s ~/bin/git_code_sniffer_hooks/pre-commit ~/workspace/test/.git/hooks/
-ln -s ~/bin/git_code_sniffer_hooks/pre-receive ~/workspace/test/.git/hooks/
-```
-
-## 手动检测：
-
-```shell
-~/bin/git_code_sniffer_hooks/bin/phpcs ~/demo.php # PHP
-~/bin/git_code_sniffer_hooks/bin/jshint ~/demo.js # JavaScript
-```
+#说明
+>- 执行git commit 时，如果代码格式有误会禁止提交，可将~/bin/git_code_sniffer_hooks/configs/default.cfg中commit节点下的REJECT_COMMIT设置为False以改变其行为
+>- 执行单个php文件检查： ~/bin/git_code_sniffer_hooks/bin/phpcs ~/demo.php
+>- 执行单个js文件检查： ~/bin/git_code_sniffer_hooks/bin/jshint ~/demo.js
